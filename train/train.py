@@ -9,10 +9,17 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 import joblib
-
+from sklearn.preprocessing import OrdinalEncoder
 
 df = pd.read_csv('healthcare-dataset-stroke-data.csv') 
 
 
 df['bmi'] = pd.to_numeric(df['bmi'], errors='coerce')
 df['bmi'].fillna(df['bmi'].mean(), inplace=True)
+
+
+df2 = df.drop('id',axis=1)
+categorical_cols = ['gender','ever_married','work_type','Residence_type','smoking_status']
+
+oe = OrdinalEncoder()
+df2[categorical_cols] = oe.fit_transform(df2[categorical_cols])
