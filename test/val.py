@@ -64,3 +64,17 @@ plt.xlabel('Predicted Probability Bin')
 plt.ylabel('Actual Class')
 plt.yticks(rotation=0)
 plt.show()
+
+
+
+#COnfusion matric heatmanp 
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix Heatmap')
+plt.show()
