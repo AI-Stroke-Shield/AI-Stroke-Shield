@@ -34,3 +34,10 @@ plt.ylabel("True Positive Rate")
 plt.title("ROC Curve")
 plt.legend()
 plt.show()
+
+#correlation heetmap
+correlation_matrix = x_train.corr()
+plt.figure(figsize=(12, 10))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+plt.title('Correlation Heatmap of Features')
+plt.show()
