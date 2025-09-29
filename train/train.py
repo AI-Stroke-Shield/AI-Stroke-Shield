@@ -29,3 +29,11 @@ df_major = df2[(df2['stroke']==0)]
 df_minor = df2[(df2['stroke']==1)]
 df_minor_resmapled = resample(df_minor,replace=True,n_samples=4861,random_state=42)
 df_resampled = pd.concat([df_minor_resmapled,df_major])
+
+x = df_resampled.iloc[:,:-1]
+y = df_resampled['stroke']
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=7)
+xgb = XGBClassifier()
+xgb.fit(x_train,y_train)
+y_pred = xgb.predict(x_test)
+print("Classification Report", classification_report(y_test,y_pred))
