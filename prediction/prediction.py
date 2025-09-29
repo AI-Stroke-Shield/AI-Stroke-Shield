@@ -48,3 +48,14 @@ oe.fit(combined_df_for_fitting) # Fit on the combined data
 new_user_df[categorical_cols] = oe.transform(new_user_df[categorical_cols])
 
 display(new_user_df)
+
+
+# Step 4: Predict stroke
+# Predict the class (0 or 1)
+predicted_class = loaded_model.predict(new_user_df)
+
+# Predict the probability of stroke
+predicted_proba = loaded_model.predict_proba(new_user_df)[:, 1]
+
+print(f"Predicted class: {predicted_class[0]}")
+print(f"Predicted probability of stroke: {predicted_proba[0]:.4f}")
