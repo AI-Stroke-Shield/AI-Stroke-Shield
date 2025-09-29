@@ -43,4 +43,8 @@ np.save('x_test.npy', x_test)
 
 xgb.fit(x_train,y_train)
 y_pred = xgb.predict(x_test)
+
+np.save('y_pred.npy', y_pred)
+
 print("Classification Report", classification_report(y_test,y_pred))
+
