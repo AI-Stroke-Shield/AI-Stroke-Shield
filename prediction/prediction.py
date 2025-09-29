@@ -16,3 +16,7 @@ new_user_data = {
 new_user_df = pd.DataFrame(new_user_data)
 
 display(new_user_df)
+
+# Step 2: Load the model
+loaded_model = joblib.load('xgb_boost_model.pk1')
+print("XGBoost model loaded successfully.")
