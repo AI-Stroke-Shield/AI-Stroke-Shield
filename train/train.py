@@ -10,6 +10,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 import joblib
 from sklearn.preprocessing import OrdinalEncoder
+from sklearn.utils import resample
 
 df = pd.read_csv('healthcare-dataset-stroke-data.csv') 
 
@@ -22,3 +23,9 @@ categorical_cols = ['gender','ever_married','work_type','Residence_type','smokin
 
 oe = OrdinalEncoder()
 df2[categorical_cols] = oe.fit_transform(df2[categorical_cols])
+
+
+df_major = df2[(df2['stroke']==0)]
+df_minor = df2[(df2['stroke']==1)]
+df_minor_resmapled = resample(df_minor,replace=True,n_samples=4861,random_state=42)
+df_resampled = pd.concat([df_minor_resmapled,df_major])
