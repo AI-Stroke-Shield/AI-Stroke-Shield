@@ -18,3 +18,19 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix")
 plt.show()
+
+from sklearn.metrics import roc_auc_score, roc_curve
+
+y_proba = xgb.predict_proba(x_test)[:, 1]
+roc_auc = roc_auc_score(y_test, y_proba)
+print("ROC-AUC Score:", roc_auc)
+
+fpr, tpr, _ = roc_curve(y_test, y_proba)
+
+plt.plot(fpr, tpr, label=f"ROC curve (AUC = {roc_auc:.2f})")
+plt.plot([0,1], [0,1], linestyle='--')
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+plt.show()
