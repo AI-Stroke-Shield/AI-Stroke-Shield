@@ -78,3 +78,12 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix Heatmap')
 plt.show()
+
+
+#prediction probability
+plt.hist(y_proba, bins=50, alpha=0.7)
+plt.title("Prediction Probability Distribution")
+plt.xlabel("Predicted Probability")
+plt.ylabel("Frequency")
+plt.grid()
+plt.show()
