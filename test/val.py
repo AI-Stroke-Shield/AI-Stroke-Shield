@@ -93,3 +93,15 @@ from xgboost import plot_importance
 plot_importance(xgb, importance_type='gain')
 plt.title("Feature Importance (by Gain)")
 plt.show()
+
+#precision-recall curve
+from sklearn.metrics import precision_recall_curve
+import matplotlib.pyplot as plt
+
+precision, recall, thresholds = precision_recall_curve(y_test, y_proba)
+plt.plot(recall, precision)
+plt.xlabel('Recall')
+plt.ylabel('Precision')
+plt.title('Precision-Recall Curve')
+plt.grid()
+plt.show()
