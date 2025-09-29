@@ -41,3 +41,26 @@ plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
 plt.title('Correlation Heatmap of Features')
 plt.show()
+
+#Heatmap of predicted probabilities vs. actual classes.
+# Get predicted probabilities
+y_proba = xgb.predict_proba(x_test)[:, 1]
+
+# Create a DataFrame for visualization
+results_df = pd.DataFrame({'Actual Class': y_test, 'Predicted Probability (Stroke)': y_proba})
+
+# Create bins for predicted probabilities
+bins = np.linspace(0, 1, 11)
+results_df['Probability Bin'] = pd.cut(results_df['Predicted Probability (Stroke)'], bins=bins, include_lowest=True)
+
+# Group by actual class and probability bin, then count occurrences
+heatmap_data = results_df.groupby(['Actual Class', 'Probability Bin']).size().unstack(fill_value=0)
+
+# Plot the heatmap
+plt.figure(figsize=(10, 6))
+sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='Blues')
+plt.title('Heatmap of Predicted Probability Bins vs. Actual Class')
+plt.xlabel('Predicted Probability Bin')
+plt.ylabel('Actual Class')
+plt.yticks(rotation=0)
+plt.show()
