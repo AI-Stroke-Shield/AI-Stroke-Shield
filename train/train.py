@@ -11,6 +11,7 @@ from sklearn.metrics import classification_report
 import joblib
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.utils import resample
+import numpy as np
 
 df = pd.read_csv('healthcare-dataset-stroke-data.csv') 
 
@@ -34,6 +35,13 @@ x = df_resampled.iloc[:,:-1]
 y = df_resampled['stroke']
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=7)
 xgb = XGBClassifier()
+
+np.save('y_test.npy', y_test)
+np.save('y_train.npy', y_train)
+np.save('x_train.npy', x_train)
+np.save('x_test.npy', x_test)
+
 xgb.fit(x_train,y_train)
 y_pred = xgb.predict(x_test)
 print("Classification Report", classification_report(y_test,y_pred))
+
