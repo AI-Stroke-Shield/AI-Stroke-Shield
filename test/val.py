@@ -87,3 +87,9 @@ plt.xlabel("Predicted Probability")
 plt.ylabel("Frequency")
 plt.grid()
 plt.show()
+
+#feature importance
+from xgboost import plot_importance
+plot_importance(xgb, importance_type='gain')
+plt.title("Feature Importance (by Gain)")
+plt.show()
