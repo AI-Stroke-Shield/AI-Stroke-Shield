@@ -21,8 +21,8 @@ st.title("Stroke Prediction App 🧠")
 with st.form(key='stroke_form'):
     gender = st.selectbox("Gender", ["Male", "Female", "Other"])
     age = st.number_input("Age", min_value=0, max_value=120, value=50)
-    hypertension = st.selectbox("Hypertension", [0, 1])
-    heart_disease = st.selectbox("Heart Disease", [0, 1])
+    hypertension = st.selectbox("Hypertension", ['No', 'Yes'])
+    heart_disease = st.selectbox("Heart Disease", ['No', 'Yes'])
     ever_married = st.selectbox("Ever Married", ["Yes", "No"])
     work_type = st.selectbox("Work Type", ["Private", "Self-employed", "Govt_job", "Children", "Never_worked"])
     residence_type = st.selectbox("Residence Type", ["Urban", "Rural"])
@@ -34,6 +34,9 @@ with st.form(key='stroke_form'):
 
 if submit_button:
     # Create new user DataFrame
+
+    hypertension = 1 if hypertension == "Yes" else 0
+    heart_disease = 1 if heart_disease == "Yes" else 0
     new_user_data = {
         'gender': [gender],
         'age': [age],
