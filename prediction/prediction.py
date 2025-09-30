@@ -1,5 +1,15 @@
+import pandas as pd
+import joblib
+from sklearn.preprocessing import OrdinalEncoder
+import pickle
+
 # Step 1: Prepare new data
 # Create a DataFrame for a new user (replace with your actual data)
+df2 = pd.read_csv('../train/dataset_dataframe.csv')
+
+loaded_model = joblib.load('../model/xgb_boost_model.pk1')
+print("XGBoost model loaded successfully.")
+
 new_user_data = {
     'gender': ['Male'],
     'age': [65.0],
@@ -15,18 +25,18 @@ new_user_data = {
 
 new_user_df = pd.DataFrame(new_user_data)
 
-display(new_user_df)
+print(new_user_df)
 
 # Step 2: Load the model
-loaded_model = joblib.load('xgb_boost_model.pk1')
-print("XGBoost model loaded successfully.")
 
 # Step 3: Preprocess the new data
 # Handle missing BMI values (using the mean from the training data, if available, or recalculate)
 # Since we don't have the original mean readily available, we'll use the mean from the existing df for demonstration
 # In a real scenario, you would save and load the mean from the training data
 new_user_df['bmi'] = pd.to_numeric(new_user_df['bmi'], errors='coerce')
-mean_bmi = df['bmi'].mean() # Using mean from the original df for demonstration
+with open("../train/mean_bmi.pkl", "rb") as f:
+    mean_bmi= pickle.load(f) 
+    
 new_user_df['bmi'].fillna(mean_bmi, inplace=True)
 
 
@@ -47,7 +57,7 @@ oe.fit(combined_df_for_fitting) # Fit on the combined data
 # Transform the new user data
 new_user_df[categorical_cols] = oe.transform(new_user_df[categorical_cols])
 
-display(new_user_df)
+print(new_user_df)
 
 
 # Step 4: Predict stroke

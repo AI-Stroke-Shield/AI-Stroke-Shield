@@ -2,9 +2,26 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from sklearn.metrics import roc_auc_score, roc_curve
+import joblib
 
-y_test = np.load('y_test.npy')
-y_pred = np.load('y_pred.npy')
+
+xgb = joblib.load('../model/xgb_boost_model.pk1')
+y_test = np.load('../train/y_test.npy')
+x_test = np.load('../train/x_test.npy')
+y_train = np.load('../train/y_train.npy')
+x_train = np.load('../train/x_train.npy')
+y_pred = np.load('../train/y_pred.npy')
+
+y_test_pd = pd.DataFrame(y_test)
+x_test_pd = pd.DataFrame(x_test)
+y_train_pd = pd.DataFrame(y_train)
+x_train_pd = pd.DataFrame(x_train)
+y_pred_pd = pd.DataFrame(y_pred)
+
+
+
 
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Precision:", precision_score(y_test, y_pred))
@@ -19,7 +36,7 @@ plt.ylabel("Actual")
 plt.title("Confusion Matrix")
 plt.show()
 
-from sklearn.metrics import roc_auc_score, roc_curve
+
 
 y_proba = xgb.predict_proba(x_test)[:, 1]
 roc_auc = roc_auc_score(y_test, y_proba)
@@ -36,7 +53,8 @@ plt.legend()
 plt.show()
 
 #correlation heetmap
-correlation_matrix = x_train.corr()
+
+correlation_matrix = x_train_pd.corr()
 plt.figure(figsize=(12, 10))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
 plt.title('Correlation Heatmap of Features')

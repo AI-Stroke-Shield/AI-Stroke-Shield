@@ -12,14 +12,21 @@ import joblib
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.utils import resample
 import numpy as np
+import pickle
 
-df = pd.read_csv('healthcare-dataset-stroke-data.csv') 
+df = pd.read_csv('../healthcare-dataset-stroke-data.csv') 
 
 
 df['bmi'] = pd.to_numeric(df['bmi'], errors='coerce')
 df['bmi'].fillna(df['bmi'].mean(), inplace=True)
 
+mean_bmi = df['bmi'].mean()
+with open("mean_bmi.pkl", "wb") as f:
+    pickle.dump(mean_bmi, f)
+
+
 df2 = df.drop('id',axis=1)
+df2.to_csv("dataset_dataframe.csv", index=False)
 categorical_cols = ['gender','ever_married','work_type','Residence_type','smoking_status']
 
 oe = OrdinalEncoder()
@@ -47,4 +54,5 @@ y_pred = xgb.predict(x_test)
 np.save('y_pred.npy', y_pred)
 
 print("Classification Report", classification_report(y_test,y_pred))
+joblib.dump(xgb, '../model/xgb_boost_model.pk1')
 
