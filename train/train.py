@@ -5,18 +5,9 @@ import numpy as np
 import pandas as pd
 import joblib
 
-<<<<<<< HEAD
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OrdinalEncoder
-from sklearn.metrics import classification_report
-from sklearn.utils import resample
-from xgboost import XGBClassifier
-=======
 df = pd.read_csv('../dataset/healthcare-dataset-stroke-data.csv') 
->>>>>>> b42457dce94541b5640d51b0dde777597ac1da2f
 
-# 📄 Load dataset
-df = pd.read_csv('../healthcare-dataset-stroke-data.csv')
+
 
 # 🧹 Clean BMI column
 df['bmi'] = pd.to_numeric(df['bmi'], errors='coerce')
@@ -27,16 +18,10 @@ mean_bmi = df['bmi'].mean()
 with open("train_results/mean_bmi.pkl", "wb") as f:
     pickle.dump(mean_bmi, f)
 
-<<<<<<< HEAD
-# 🧠 Drop ID and encode categoricals
-df2 = df.drop('id', axis=1)
-df2.to_csv("dataset_dataframe.csv", index=False)
-=======
 
 df2 = df.drop('id',axis=1)
 df2.to_csv("train_results/dataset_dataframe.csv", index=False)
 categorical_cols = ['gender','ever_married','work_type','Residence_type','smoking_status']
->>>>>>> b42457dce94541b5640d51b0dde777597ac1da2f
 
 categorical_cols = ['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status']
 oe = OrdinalEncoder()
@@ -53,19 +38,6 @@ X = df_resampled.drop('stroke', axis=1)
 y = df_resampled['stroke']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=7)
 
-<<<<<<< HEAD
-# 💾 Save arrays
-np.save('x_train.npy', X_train)
-np.save('x_test.npy', X_test)
-np.save('y_train.npy', y_train)
-np.save('y_test.npy', y_test)
-
-# 🧠 Train model
-xgb = XGBClassifier()
-xgb.fit(X_train, y_train)
-y_pred = xgb.predict(X_test)
-np.save('y_pred.npy', y_pred)
-=======
 np.save('train_results/y_test.npy', y_test)
 np.save('train_results/y_train.npy', y_train)
 np.save('train_results/x_train.npy', x_train)
@@ -75,7 +47,6 @@ xgb.fit(x_train,y_train)
 y_pred = xgb.predict(x_test)
 
 np.save('train_results/y_pred.npy', y_pred)
->>>>>>> b42457dce94541b5640d51b0dde777597ac1da2f
 
 # 📊 Print classification report
 print("Classification Report\n", classification_report(y_test, y_pred))
