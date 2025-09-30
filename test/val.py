@@ -3,8 +3,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-y_test_loaded = np.load('y_test.npy')
-y_pred_loaded = np.load('y_pred.npy')
+y_test = np.load('y_test.npy')
+y_pred = np.load('y_pred.npy')
 
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Precision:", precision_score(y_test, y_pred))
