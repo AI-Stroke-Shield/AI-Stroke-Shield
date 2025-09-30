@@ -13,7 +13,7 @@ df = pd.read_csv('../dataset/healthcare-dataset-stroke-data.csv')
 
 
 df['bmi'] = pd.to_numeric(df['bmi'], errors='coerce')
-df['bmi'].fillna(df['bmi'].mean(), inplace=True)
+df['bmi'] = df['bmi'].fillna(df['bmi'].mean())
 
 mean_bmi = df['bmi'].mean()
 with open("train_results/mean_bmi.pkl", "wb") as f:
