@@ -11,7 +11,7 @@ print("XGBoost model loaded successfully.")
 
 new_user_data = {
     'gender': ['Male'],
-    'age': [65.0],
+    'age': [65],
     'hypertension': [0],
     'heart_disease': [1],
     'ever_married': ['Yes'],
@@ -27,7 +27,7 @@ new_user_df = pd.DataFrame(new_user_data)
 print(new_user_df)
 
 new_user_df['bmi'] = pd.to_numeric(new_user_df['bmi'], errors='coerce')
-with open("../train/mean_bmi.pkl", "rb") as f:
+with open("../train/train_results/mean_bmi.pkl", "rb") as f:
     mean_bmi= pickle.load(f) 
     
 new_user_df['bmi'].fillna(mean_bmi, inplace=True)

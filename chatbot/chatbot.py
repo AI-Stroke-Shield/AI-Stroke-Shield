@@ -20,7 +20,7 @@ st.title("Stroke Prediction App 🧠")
 # Form for user input
 with st.form(key='stroke_form'):
     gender = st.selectbox("Gender", ["Male", "Female", "Other"])
-    age = st.number_input("Age", min_value=0.0, max_value=120.0, value=50.0)
+    age = st.number_input("Age", min_value=0, max_value=120, value=50)
     hypertension = st.selectbox("Hypertension", [0, 1])
     heart_disease = st.selectbox("Heart Disease", [0, 1])
     ever_married = st.selectbox("Ever Married", ["Yes", "No"])
