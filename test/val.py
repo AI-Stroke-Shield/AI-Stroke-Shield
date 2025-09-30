@@ -8,11 +8,11 @@ import joblib
 
 
 xgb = joblib.load('../model/xgb_boost_model.pk1')
-y_test = np.load('../train/y_test.npy')
-x_test = np.load('../train/x_test.npy')
-y_train = np.load('../train/y_train.npy')
-x_train = np.load('../train/x_train.npy')
-y_pred = np.load('../train/y_pred.npy')
+y_test = np.load('../train/train_results/y_test.npy')
+x_test = np.load('../train/train_results/x_test.npy')
+y_train = np.load('../train/train_results/y_train.npy')
+x_train = np.load('../train/train_results/x_train.npy')
+y_pred = np.load('../train/train_results/y_pred.npy')
 
 y_test_pd = pd.DataFrame(y_test)
 x_test_pd = pd.DataFrame(x_test)
