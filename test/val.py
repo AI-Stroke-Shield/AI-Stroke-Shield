@@ -39,49 +39,6 @@ plt.show()
 
 
 y_proba = xgb.predict_proba(x_test)[:, 1]
-roc_auc = roc_auc_score(y_test, y_proba)
-print("ROC-AUC Score:", roc_auc)
-
-fpr, tpr, _ = roc_curve(y_test, y_proba)
-
-plt.plot(fpr, tpr, label=f"ROC curve (AUC = {roc_auc:.2f})")
-plt.plot([0,1], [0,1], linestyle='--')
-plt.xlabel("False Positive Rate")
-plt.ylabel("True Positive Rate")
-plt.title("ROC Curve")
-plt.legend()
-plt.show()
-
-#correlation heetmap
-
-correlation_matrix = x_train_pd.corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
-plt.title('Correlation Heatmap of Features')
-plt.show()
-
-#Heatmap of predicted probabilities vs. actual classes.
-# Get predicted probabilities
-y_proba = xgb.predict_proba(x_test)[:, 1]
-
-# Create a DataFrame for visualization
-results_df = pd.DataFrame({'Actual Class': y_test, 'Predicted Probability (Stroke)': y_proba})
-
-# Create bins for predicted probabilities
-bins = np.linspace(0, 1, 11)
-results_df['Probability Bin'] = pd.cut(results_df['Predicted Probability (Stroke)'], bins=bins, include_lowest=True)
-
-# Group by actual class and probability bin, then count occurrences
-heatmap_data = results_df.groupby(['Actual Class', 'Probability Bin']).size().unstack(fill_value=0)
-
-# Plot the heatmap
-plt.figure(figsize=(10, 6))
-sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='Blues')
-plt.title('Heatmap of Predicted Probability Bins vs. Actual Class')
-plt.xlabel('Predicted Probability Bin')
-plt.ylabel('Actual Class')
-plt.yticks(rotation=0)
-plt.show()
 
 
 
@@ -90,12 +47,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.title('Confusion Matrix Heatmap')
-plt.show()
 
 
 #prediction probability
