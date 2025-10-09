@@ -1,85 +1,85 @@
-# AI-Stroke-Shield
+ Project Overview
 
-[![Python](https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/streamlit-1.28-orange?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+AI-Stroke-Shield is a machine learning–based clinical decision-support tool that predicts the likelihood of a patient having a stroke using simple health indicators such as age, BMI, glucose level, smoking status, and heart disease history.
+The project leverages XGBoost for high accuracy and integrates it into a Streamlit web app for real time prediction.
+This project demonstrates the use of AI in healthcare for early detection and prevention reducing hospital workload and improving timely intervention for patients at risk.
 
-AI Stroke Shield is an intelligent healthcare project that leverages **artificial intelligence and machine learning** to detect early signs of stroke from medical data. The system assists healthcare professionals in timely diagnosis, improving patient outcomes and saving lives.
+Project Workflow
+1. Data Preparation
 
----
+Dataset: healthcare-dataset-stroke-data.csv https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
-## 📁 Dataset Source
+Missing values (BMI) handled using mean imputation.
 
-The dataset used in this project was sourced from:  
+Categorical data Gender, Age, Hypertension, Heart Disease, Ever Married, Work Type, Residence Type, Average Glucose Level, BMI, Smoking Status.
 
-🔗 [Stroke Prediction Dataset on Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset/data)
+Minority class (stroke = 1) resampled to balance the dataset.
 
-It includes health-related features such as **age, gender, hypertension, heart disease, BMI**, etc., and indicates whether a stroke occurred.
+2. Model Training
 
----
+Algorithm: XGBoost (XGBClassifier)
 
-## 🧠 Model Description
+Training/test split: 80/20
 
-The project uses a **machine learning classifier** trained on patient health data to predict the likelihood of a stroke. Key points:  
+Model saved using joblib as xgb_boost_model.pk1
 
-- **Algorithm**: XGBoost
-- **Input Features**: Age, Gender, Hypertension, Heart Disease, BMI, Smoking Status, etc.  
-- **Output**: Probability of stroke (0–100%)  
+Evaluation metrics: Accuracy, Precision, Recall, F1-Score
 
-The model is integrated with a **Streamlit web application** for easy interaction and visualization.
+3. Model Evaluation
 
----
+Includes visualizations and performance metrics:
 
-## ⚙️ Installation
+Confusion Matrix
 
-Follow these steps to run AI-Stroke-Shield locally:
+ROC Curve
 
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/AI-Stroke-Shield.git
+Precision–Recall Curve
+
+Feature Importance Plot
+
+Deployment
+
+The trained model is deployed in a Streamlit app that allows user input through dropdowns and numeric fields.
+The app predicts whether a patient is likely to experience a stroke and displays the predicted probability.
+
+🧩 Installation Guide
+1. Clone the repository
+git clone https://github.com/AI-Stroke-Shield/AI-Stroke-Shield.git
 cd AI-Stroke-Shield
 
-Create a virtual environment (optional but recommended)
-
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
-
-
-Install dependencies
-
+2. Install dependencies
 pip install -r requirements.txt
 
-🚀 Usage
 
-To start the Streamlit web app:
+Typical dependencies:
 
-streamlit run chatbot/chatbot.py
+streamlit
+pandas
+numpy
+scikit-learn
+xgboost
+matplotlib
+seaborn
+imbalanced-learn
+joblib
+pickle5
+
+3. Run the Streamlit app
+cd chatbot
+streamlit run chatbot.py
+
+How to Use
+
+Launch the Streamlit web app.
+
+Enter patient details:
+
+Gender, Age, Hypertension, Heart Disease, Ever Married, Work Type, Residence Type, Average Glucose Level, BMI, Smoking Status.
+
+Click “Predict Stroke”.
+
+The model will display:
+
+Prediction result: Stroke / No Stroke
 
 
-Enter patient information in the input fields.
-
-Click Predict to see the stroke risk probability.
-
-View a progress bar and probability percentage for intuitive visualization.
-
-
-✨ Features
-
-Real-time stroke risk prediction
-
-User-friendly web interface with Streamlit
-
-Visual progress bar for probability
-
-Easily extendable to include new features and models
-
-🛠️ Technologies Used
-
-Python 3.11
-
-Streamlit
-
-Scikit-learn / XGBoost / TensorFlow
-
-Pandas & NumPy for data processing
