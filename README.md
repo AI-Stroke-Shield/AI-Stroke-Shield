@@ -42,7 +42,7 @@ Deployment
 The trained model is deployed in a Streamlit app that allows user input through dropdowns and numeric fields.
 The app predicts whether a patient is likely to experience a stroke and displays the predicted probability.
 
-🧩 Installation Guide
+Installation Guide
 1. Clone the repository
 git clone https://github.com/AI-Stroke-Shield/AI-Stroke-Shield.git
 cd AI-Stroke-Shield
