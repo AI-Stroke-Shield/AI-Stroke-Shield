@@ -50,3 +50,5 @@ np.save('train_results/y_pred.npy', y_pred)
 
 print("Classification Report", classification_report(y_test,y_pred))
 joblib.dump(xgb, '../model/xgb_boost_model.pk1')
+
+print("✅ Model trained successfully! Classification report and encoder saved.")

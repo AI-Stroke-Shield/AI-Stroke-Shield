@@ -4,39 +4,92 @@ import joblib
 from sklearn.preprocessing import OrdinalEncoder
 import pickle
 
-# Load model
-loaded_model = joblib.load('../model/xgb_boost_model.pk1')
-st.success("XGBoost model loaded successfully.")
 
-# Load original dataset for encoding reference
-df2 = pd.read_csv('../train/train_results/dataset_dataframe.csv')
+st.set_page_config(page_title="🧠 Stroke Prediction App", page_icon="💉", layout="centered")
 
-# Load mean BMI
-with open("../train/train_results/mean_bmi.pkl", "rb") as f:
-    mean_bmi = pickle.load(f)
 
-st.title("Stroke Prediction App 🧠")
+if 'clear_form' not in st.session_state:
+    st.session_state.clear_form = False
 
-# Form for user input
+
+with st.spinner("Loading model and data..."):
+    loaded_model = joblib.load('../model/xgb_boost_model.pk1')
+    df2 = pd.read_csv('../train/train_results/dataset_dataframe.csv')
+    with open("../train/train_results/mean_bmi.pkl", "rb") as f:
+        mean_bmi = pickle.load(f)
+
+st.success("✅ XGBoost model loaded successfully!")
+
+
+st.markdown(
+    """
+    <div style='text-align:center'>
+        <h1>🧠 Stroke Prediction App</h1>
+        <p style='color:gray;'>Predict your stroke risk using AI-powered analysis.</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+st.sidebar.header("💡 About")
+st.sidebar.info(
+    "Predict your stroke risk based on health indicators.\n\n"
+    "Adjust inputs and click **Predict Stroke** to see results."
+)
+st.sidebar.markdown("---")
+st.sidebar.write("👨‍⚕️ Model: XGBoost Classifier")
+st.sidebar.write("📊 Trained with real patient data by the AI-Stroke-Shield team")
+st.sidebar.write("""
+🩺 Built by:  
+- Sidney Mpenyana  
+- SG Rakobela  
+- VP Machave  
+- P Chauke
+""")
+
+
 with st.form(key='stroke_form'):
-    gender = st.selectbox("Gender", ["Male", "Female", "Other"])
-    age = st.number_input("Age", min_value=0, max_value=120, value=50)
-    hypertension = st.selectbox("Hypertension", ['No', 'Yes'])
-    heart_disease = st.selectbox("Heart Disease", ['No', 'Yes'])
-    ever_married = st.selectbox("Ever Married", ["Yes", "No"])
-    work_type = st.selectbox("Work Type", ["Private", "Self-employed", "Govt_job", "Children", "Never_worked"])
-    residence_type = st.selectbox("Residence Type", ["Urban", "Rural"])
-    avg_glucose_level = st.number_input("Average Glucose Level", min_value=0.0, max_value=500.0, value=120.0)
-    bmi = st.number_input("BMI", min_value=0.0, max_value=100.0, value=25.0)
-    smoking_status = st.selectbox("Smoking Status", ["formerly smoked", "never smoked", "smokes", "Unknown"])
-    
-    submit_button = st.form_submit_button(label='Predict Stroke')
+    st.markdown("### 🧍‍♂️ Demographic Information")
+    col1, col2 = st.columns(2)
+    with col1:
+        gender = st.selectbox("⚥ Gender", ["Male", "Female", "Other"], index=0 if st.session_state.clear_form else 0)
+        age = st.number_input("🎂 Age", min_value=0, max_value=100, value=0 if st.session_state.clear_form else 50)
+        ever_married = st.selectbox("💍 Ever Married", ["Yes", "No"], index=0 if st.session_state.clear_form else 0)
+    with col2:
+        residence_type = st.selectbox("🏡 Residence Type", ["Urban", "Rural"], index=0 if st.session_state.clear_form else 0)
+        work_type = st.selectbox("💼 Work Type", ["Private", "Self-employed", "Govt_job", "Children", "Never_worked"], index=0 if st.session_state.clear_form else 0)
+
+    st.markdown("### ❤️ Health Indicators")
+    col3, col4 = st.columns(2)
+    with col3:
+        hypertension = st.selectbox("🩸 Hypertension", ['No', 'Yes'], index=0 if st.session_state.clear_form else 0)
+        heart_disease = st.selectbox("💔 Heart Disease", ['No', 'Yes'], index=0 if st.session_state.clear_form else 0)
+    with col4:
+        avg_glucose_level = st.number_input("🧪 Average Glucose Level", min_value=0.0, max_value=500.0, value=0.0 if st.session_state.clear_form else 120.0)
+        bmi = st.number_input("⚖️ BMI", min_value=0.0, max_value=100.0, value=0.0 if st.session_state.clear_form else 25.0)
+
+    smoking_status = st.selectbox("🚬 Smoking Status", ["formerly smoked", "never smoked", "smokes", "Unknown"], index=0 if st.session_state.clear_form else 0)
+
+    submit_button = st.form_submit_button(label='🔍 Predict Stroke')
+    clear_button = st.form_submit_button(label='🧹 Clear Form')
+
+
+if clear_button:
+    st.session_state.clear_form = True
+    st.rerun()  
+
 
 if submit_button:
-    # Create new user DataFrame
+    st.session_state.clear_form = False
 
+    
     hypertension = 1 if hypertension == "Yes" else 0
     heart_disease = 1 if heart_disease == "Yes" else 0
+    ever_married = 1 if ever_married == "Yes" else 0
+    residence_type = 1 if residence_type == "Urban" else 0
+
+    
     new_user_data = {
         'gender': [gender],
         'age': [age],
@@ -49,26 +102,30 @@ if submit_button:
         'bmi': [bmi],
         'smoking_status': [smoking_status]
     }
-    
+
     new_user_df = pd.DataFrame(new_user_data)
-    
-    # Fill missing BMI with mean
-    new_user_df['bmi'] = pd.to_numeric(new_user_df['bmi'], errors='coerce')
-    new_user_df['bmi'].fillna(mean_bmi, inplace=True)
-    
-    # Encode categorical features
-    categorical_cols = ['gender','ever_married','work_type','Residence_type','smoking_status']
-    combined_df_for_fitting = pd.concat([df2[categorical_cols].astype(str), new_user_df[categorical_cols].astype(str)], ignore_index=True)
+    new_user_df['bmi'] = pd.to_numeric(new_user_df['bmi'], errors='coerce').fillna(mean_bmi)
+
+   
+    categorical_cols = ['gender', 'work_type', 'smoking_status']
+    combined_df_for_fitting = pd.concat(
+        [df2[categorical_cols].astype(str), new_user_df[categorical_cols].astype(str)],
+        ignore_index=True
+    )
     oe = OrdinalEncoder()
     oe.fit(combined_df_for_fitting)
-    
     new_user_df[categorical_cols] = oe.transform(new_user_df[categorical_cols])
+
     
-    # Make prediction
     predicted_class = loaded_model.predict(new_user_df)[0]
-    predicted_proba = loaded_model.predict_proba(new_user_df)[:, 1][0]
-    
-    # Display results
-    st.subheader("Prediction Results")
-    st.write(f"Predicted class: {'Stroke' if predicted_class == 1 else 'No Stroke'}")
-    st.write(f"Predicted probability of stroke: {predicted_proba:.4f}")
+    predicted_proba = float(loaded_model.predict_proba(new_user_df)[:, 1][0])
+
+    st.markdown("---")
+    st.markdown("## 🧾 Prediction Results")
+
+    if predicted_class == 1:
+        st.error(f"⚠️ High risk of Stroke!\n\n**Probability:** {predicted_proba:.2%}")
+    else:
+        st.success(f"✅ Low risk of Stroke.\n\n**Probability:** {predicted_proba:.2%}")
+
+    st.progress(predicted_proba)
