@@ -22,7 +22,7 @@ It includes health-related features such as **age, gender, hypertension, heart d
 
 The project uses a **machine learning classifier** trained on patient health data to predict the likelihood of a stroke. Key points:  
 
-- **Algorithm**: Logistic Regression / Random Forest / [Specify your model]  
+- **Algorithm**: XGBoost
 - **Input Features**: Age, Gender, Hypertension, Heart Disease, BMI, Smoking Status, etc.  
 - **Output**: Probability of stroke (0–100%)  
 
