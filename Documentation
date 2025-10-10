@@ -1,4 +1,5 @@
 AI Solution - Relevance to the theme
+
 The proposed ai stroke shield solution aligns with the theme of using artificial intelligence 
 to improve healthcare within local communities. It applies machine learning to predict the 
 likelihood of stroke based on medical and lifestyle data such as age, bmi, glucose levels and 
@@ -10,7 +11,7 @@ accessibility and directly contributes to improved community wellbeing making it
 relevant and impactful to the theme and environment described in the project brief. 
 
 
-Problem defination
+Problem Defination
 
 Stroke remains one of the most serious public health challanges in South Africa, particularly 
 in local communities where earlt medical screening and diagnostic technologies are limited.
@@ -50,7 +51,7 @@ or LSTM, we could study monthly health data to detect gradual changes that may l
 This approach would shift the model from a one-time prediction to continuous monitoring, making it
  more proactive and valuable for community health systems.
 
-Deep learning
+Deep Learning
 For future enhancement of the ai stroke shield system, we plan to implement deep learning approaches 
 to improve predictive accuracy and expand diagnostic capabilities. Specifically, we will develop 
 neural network models that can identify complex, non-linear patterns in patient data that traditional 
@@ -80,7 +81,7 @@ Data
 To teach the AI Stroke Shield how to spot potential strokes, we fed it a rich collection of real patient health records. This information included all sorts of relevant details, from straightforward numbers like a person's age, glucose levels, and BMI, to personal information such as their smoking habits, type of work, and whether they live in an urban or rural area. Before the computer could learn from this data, we had to tidy it up. For example, if a patient's BMI was missing, we plugged in a typical average value. We also converted all text-based categories, such as "smoking status," into numerical codes that the algorithm could understand. 
 A key challenge was that the data had very few examples of actual strokes compared to non-strokes. To make sure our model learned to spot the real signs of risk, not just a "no stroke" guess every time, we balanced the dataset. After all this careful preparation, the data was clean, balanced, and ready. This solid foundation enabled our XGBoost model to learn effectively and accurately identify subtle patterns indicative of a high stroke risk.
 
-Solution techniques
+Solution Techniques
 
 Several appropriate techniques were used to ensure high model accuracy and reliability:
 Machine learning algorithms: use supervised learning models such as a random forest classifier and XGBoost to predict stroke risk from medical and lifestyle data.
