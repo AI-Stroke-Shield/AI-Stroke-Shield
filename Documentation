@@ -65,4 +65,7 @@ complex data relationships and improve early detection capabilities. The integra
 would transform the system from a risk prediction tool into a comprehensive diagnostic assistant, better
  aligning with the project's theme of leveraging advanced ai for healthcare improvement. 
 
+Machine learning approach
+The AI stroke shield system uses the xgboost algorithm, a gradient-boosted tree model designed for fast and accurate classification. This algorithm was selected because it works effectively with medical tabular data and captures complex interactions between a patient features such as age, glucose level, BMI and blood pressure. The model was trained using xgbclassifier with an 80/20 split and deployed via stream machine learning allowing users to make live predictions from new patient inputs. Evaluation metrics (accuracy, recall, precision, f1-score) confirmed that xgboost achieved strong predictive performance and is well suited for stoke risk detection.
+
  
