@@ -29,3 +29,23 @@ high-risk individuals before symptoms appear. For local municipalities, the syst
 better healthcare planning, reduces hospital admissions and saves costs. It also promotes community
 health awareness and enables preventive action, improving overall, public health outcomes and service
 efficiency.
+
+Model and Time Series Analysis on Data
+
+Our AI Stroke Shield model uses the XGBoost classifier, a supervised machine
+learning algorithm trained on the stroke dataset where 80% of the data is used for 
+training and 20% for testing. During training, the model learns relationships between
+input features such as age, BMI, glucose level, and smoking status to predict the 
+likelihood of a stroke. To test and evaluate performance, we used key accuracy 
+measures including Accuracy, Precision, Recall, F1-score, and ROC-AUC. 
+These metrics help check how correctly the model predicts stroke cases and how well it 
+identifies true positives. Visual tools like the Confusion Matrix, ROC curve, and feature 
+importance plot are also used to confirm that the model performs reliably and identifies 
+the most influential health factors. 
+
+Although the dataset is static, our project includes a plan for time series analysis to improve
+Prediction Accuracy. In real healthcare, factors such as Glucose levels and BMI change over time;
+by analyzing these trends, the system could forecast stroke risk earlier. For example, using ARIMA 
+or LSTM, we could study monthly health data to detect gradual changes that may lead to a stroke. 
+This approach would shift the model from a one-time prediction to continuous monitoring, making it
+ more proactive and valuable for community health systems.
