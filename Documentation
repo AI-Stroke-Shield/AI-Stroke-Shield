@@ -78,14 +78,20 @@ is well suited for stoke risk detection.
 
 Data
 
-To teach the AI Stroke Shield how to spot potential strokes, we fed it a rich collection of real patient health records. This information included all sorts of relevant details, from straightforward numbers like a person's age, glucose levels, and BMI, to personal information such as their smoking habits, type of work, and whether they live in an urban or rural area. Before the computer could learn from this data, we had to tidy it up. For example, if a patient's BMI was missing, we plugged in a typical average value. We also converted all text-based categories, such as "smoking status," into numerical codes that the algorithm could understand. 
-A key challenge was that the data had very few examples of actual strokes compared to non-strokes. To make sure our model learned to spot the real signs of risk, not just a "no stroke" guess every time, we balanced the dataset. After all this careful preparation, the data was clean, balanced, and ready. This solid foundation enabled our XGBoost model to learn effectively and accurately identify subtle patterns indicative of a high stroke risk.
+To teach the AI Stroke Shield how to spot potential strokes, we fed it a rich collection of real patient health records. 
+This information included all sorts of relevant details, from straightforward numbers like a person's age, glucose levels, 
+and BMI, to personal information such as their smoking habits, type of work, and whether they live in an urban or rural area. 
+Before the computer could learn from this data, we had to tidy it up. For example, if a patient's BMI was missing, we plugged 
+in a typical average value. We also converted all text-based categories, such as "smoking status," into numerical codes that 
+the algorithm could understand. A key challenge was that the data had very few examples of actual strokes compared 
+to non-strokes. To make sure our model learned to spot the real signs of risk, not just a "no stroke" guess every time,
+we balanced the dataset. After all this careful preparation, the data was clean, balanced, and ready. This solid foundation 
+enabled our XGBoost model to learn effectively and accurately identify subtle patterns indicative of a high stroke risk.
 
 Solution Techniques
 
 Several appropriate techniques were used to ensure high model accuracy and reliability:
 Machine learning algorithms: use supervised learning models such as a random forest classifier and XGBoost to predict stroke risk from medical and lifestyle data.
-
 Data preprocessing: handled missing BMI values and encoded categorical data.
 Resampling: balanced the dataset to prevent bias toward non-strike cases.
 Model tuning: used XGBoost, which inherently optimizes learning rate, depth and regularization for better accuracy.
@@ -110,4 +116,20 @@ This chatbot successfully demonstrates how AI can interact with users in a healt
 risk assessment accessible to non-experts while maintaining professional reliability. The feature is fully integrated 
 with our trained XGboost model and follows the same data preprocessing pipeline, ensuring consistent and accurate 
 predictions
+
+Natural Language Processing and Speech Features
+
+Our current AI Stroke Shield system uses text-based input fields to collect patient information such as age, gender, 
+and glucose level. The text input is processed using simple Natural Language Processing techniques to prepare data 
+for the AI stroke prediction model.
+
+Although the current version does not yet include speech recognition, this feature is planned for future implementation. 
+It will allow healthcare workers and patients to verbally provide health information (e.g. Age 65, Male, High glucose level), 
+which will be converted into text using Python’s Speech Recognition library. The addition of speech synthesis will also enable 
+the system to read results aloud (e.g. The patient is at high risk of stroke).
+This demonstrates that NLP and speech technologies are both relevant and achievable within the project scope. 
+These enhancements will make AI Stroke Shield more user friendly, accessible, and aligned with real world healthcare
+needs particularly in clinics where typing may be inconvenient.
+
+
  
