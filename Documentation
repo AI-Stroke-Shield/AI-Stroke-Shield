@@ -92,5 +92,21 @@ Model evaluation: implemented comprehensive metrics and visualization for deep i
 Deployment: integrated the trained model into a real-time chatbot interface for end-user accessibility.
 these techniques are relevant and clearly defined. they demonstrate how accuracy was improved and the ai model provides practical, data-driven stroke predictions.
 
+Other features:Chatbot/ Softbot
 
+The AI stroke sheild includes a fully functional chatbot interface that serves as the primary interaction 
+point between the users and our AI system. This chatbot is highly relevant to our healthcare solution as it
+enables accessible stroke risk assessment for both medical professionals and community members.
+
+This chatbot is well-planned and appropriately set up with the following features:
+Provide an intuitive web interface built with streamachine learningit for easy health data input
+Guides users through entering key medical parameters (age, bmi, glucose level, smoking status, ect)
+Delivers instant stroke risk predictions with clear probability scores
+Offers visual feedback through progress bars and color-coded risk indicators (green for low risk, red for high risk)
+Includes additional elements about stroke prediction and health monitoring
+
+This chatbot successfully demonstrates how AI can interact with users in a healthcare context, making advanced medical
+risk assessment accessible to non-experts while maintaining professional reliability. The feature is fully integrated 
+with our trained XGboost model and follows the same data preprocessing pipeline, ensuring consistent and accurate 
+predictions
  
