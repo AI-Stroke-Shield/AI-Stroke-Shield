@@ -75,4 +75,10 @@ machine learning allowing users to make live predictions from new patient inputs
 (accuracy, recall, precision, f1-score) confirmed that xgboost achieved strong predictive performance and 
 is well suited for stoke risk detection.
 
+Data
+
+To teach the AI Stroke Shield how to spot potential strokes, we fed it a rich collection of real patient health records. This information included all sorts of relevant details, from straightforward numbers like a person's age, glucose levels, and BMI, to personal information such as their smoking habits, type of work, and whether they live in an urban or rural area. Before the computer could learn from this data, we had to tidy it up. For example, if a patient's BMI was missing, we plugged in a typical average value. We also converted all text-based categories, such as "smoking status," into numerical codes that the algorithm could understand. 
+A key challenge was that the data had very few examples of actual strokes compared to non-strokes. To make sure our model learned to spot the real signs of risk, not just a "no stroke" guess every time, we balanced the dataset. After all this careful preparation, the data was clean, balanced, and ready. This solid foundation enabled our XGBoost model to learn effectively and accurately identify subtle patterns indicative of a high stroke risk.
+
+
  
