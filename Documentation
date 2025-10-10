@@ -8,3 +8,24 @@ risk patients before symptoms occur. By supporting early detection, efficient de
 making, and better resource allocation, the ai stroke shield solution enhances healthcare 
 accessibility and directly contributes to improved community wellbeing making it both
 relevant and impactful to the theme and environment described in the project brief. 
+
+
+Problem defination
+
+Stroke remains one of the most serious public health challanges in South Africa, particularly 
+in local communities where earlt medical screening and diagnostic technologies are limited.
+Many clinics rely on manual diagnosis and visible symptoms, which are often detected only after 
+a stroke occured. This late detection leads to preventable deaths, disabilities, and increased healthcare 
+costs. There is currently no affordable or accessible system that can automatically analyze
+patient health data to predict stroke risk before an emergency occurs. Healthcare professionals 
+also face difficulties in interpreting large amount of data such as blood pressure, bmi, age, glucose 
+level quickly and accurately. As a result, many are at risk individuals remain undentified until it is too late
+Therefore, the core problem is the lack of a proactive, data-driven prediction system that can
+assist medical practitioners in earlt stroke detection and prevention.
+
+The AI stroke shield system will fix this problem by using artificial intelligence to predict
+stroke risk early through automated analysis of patient health data. This helps clinics identify
+high-risk individuals before symptoms appear. For local municipalities, the system supports
+better healthcare planning, reduces hospital admissions and saves costs. It also promotes community
+health awareness and enables preventive action, improving overall, public health outcomes and service
+efficiency.
