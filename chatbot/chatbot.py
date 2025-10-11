@@ -53,7 +53,7 @@ with st.form(key='stroke_form'):
     st.markdown("### 🧍‍♂️ Demographic Information")
     col1, col2 = st.columns(2)
     with col1:
-        gender = st.selectbox("⚥ Gender", ["Male", "Female", "Other"], index=0 if st.session_state.clear_form else 0)
+        gender = st.selectbox("⚥ Gender", ["Male", "Female"], index=0 if st.session_state.clear_form else 0)
         age = st.number_input("🎂 Age", min_value=0, max_value=100, value=0 if st.session_state.clear_form else 50)
         ever_married = st.selectbox("💍 Ever Married", ["Yes", "No"], index=0 if st.session_state.clear_form else 0)
     with col2:
@@ -77,19 +77,17 @@ with st.form(key='stroke_form'):
 
 if clear_button:
     st.session_state.clear_form = True
-    st.rerun()  
+    st.experimental_rerun()  
 
 
 if submit_button:
     st.session_state.clear_form = False
 
-    
     hypertension = 1 if hypertension == "Yes" else 0
     heart_disease = 1 if heart_disease == "Yes" else 0
     ever_married = 1 if ever_married == "Yes" else 0
     residence_type = 1 if residence_type == "Urban" else 0
 
-    
     new_user_data = {
         'gender': [gender],
         'age': [age],
@@ -106,7 +104,6 @@ if submit_button:
     new_user_df = pd.DataFrame(new_user_data)
     new_user_df['bmi'] = pd.to_numeric(new_user_df['bmi'], errors='coerce').fillna(mean_bmi)
 
-   
     categorical_cols = ['gender', 'work_type', 'smoking_status']
     combined_df_for_fitting = pd.concat(
         [df2[categorical_cols].astype(str), new_user_df[categorical_cols].astype(str)],
@@ -116,7 +113,6 @@ if submit_button:
     oe.fit(combined_df_for_fitting)
     new_user_df[categorical_cols] = oe.transform(new_user_df[categorical_cols])
 
-    
     predicted_class = loaded_model.predict(new_user_df)[0]
     predicted_proba = float(loaded_model.predict_proba(new_user_df)[:, 1][0])
 
@@ -125,7 +121,37 @@ if submit_button:
 
     if predicted_class == 1:
         st.error(f"⚠️ High risk of Stroke!\n\n**Probability:** {predicted_proba:.2%}")
+
+        st.markdown("### 🩺 Stroke Prevention Tips")
+        st.info("""
+- 🧂 Reduce salt intake to help control blood pressure  
+- 🥗 Eat a balanced diet rich in fruits, vegetables, and whole grains  
+- 🚶 Stay physically active — aim for 30 mins/day  
+- 🚭 Quit smoking — it doubles stroke risk  
+- 🍷 Limit alcohol intake  
+- 💊 Manage chronic conditions like diabetes, hypertension, and cholesterol  
+- 🧘 Practice stress-reducing activities like meditation  
+- 🩺 Schedule regular check-ups with your doctor
+        """)
+        st.markdown(
+            "<p style='color:red; font-size:0.85rem;'>Source: WHO, CDC, and American Heart Association stroke prevention guidelines.</p>",
+            unsafe_allow_html=True,
+        )
+
     else:
         st.success(f"✅ Low risk of Stroke.\n\n**Probability:** {predicted_proba:.2%}")
+
+        st.markdown("### ✅ Keep Up the Good Habits!")
+        st.info("""
+- Maintain a healthy diet and active lifestyle  
+- Avoid smoking and excessive alcohol  
+- Keep monitoring your blood pressure and glucose levels  
+- Stay consistent with medical check-ups  
+- Manage stress to protect your heart and brain
+        """)
+        st.markdown(
+            "<p style='color:green; font-size:0.85rem;'>Source: WHO, CDC, and American Heart Association stroke prevention guidelines.</p>",
+            unsafe_allow_html=True,
+        )
 
     st.progress(predicted_proba)
