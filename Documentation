@@ -131,5 +131,14 @@ This demonstrates that NLP and speech technologies are both relevant and achieva
 These enhancements will make AI Stroke Shield more user friendly, accessible, and aligned with real world healthcare
 needs particularly in clinics where typing may be inconvenient.
 
+Business objectives, success criteria and business background
+
+Business background:
+Stroke is one of the leading causes of death and disability, particularly in developing countries like South Africa, where access to early diagnosis is limited. Many local clinics rely on manual assessment methods, which often detect stroke only after symptoms appear. This delay led to preventable deaths, long-term disability, and increased health costs. The AI stroke shield system addresses this challenge by utilizing artificial intelligence to predict the likelihood of a stroke before it occurs. Through machine learning, the system analyzes patient data, including age, BMI, glucose levels, and lifestyle factors, to support early detection, proactive medical intervention, and enhanced healthcare efficiency in local communities.
+Business objectives:
+To develop an AI-based system that accurately predicts the possibility of stroke using patient health data.
+To assist healthcare professionals in identifying high-risk individuals early for timely prevention and treatment.
+To demonstrate how machine learning and data analytics can improve decision-making in municipalities and clinical health services.
+To build an interpretable and scalable predictive model that can be easily integrated into public health systems.
 
  
